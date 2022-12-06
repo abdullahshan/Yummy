@@ -107,6 +107,22 @@ if(!isset($_SESSION['auth'])){
             </li>
 
 
+              <!-- Nav Item - Pages Collapse Menu -->
+              <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#event"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Events</span>
+                </a>
+                <div id="event" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="./insert_event.php">Event</a>
+                        <a class="collapse-item" href="./all_event.php">All events</a>
+                    </div>
+                </div>
+            </li>
+
+
 
         </ul>
         <!-- End of Sidebar -->
