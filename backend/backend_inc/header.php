@@ -124,6 +124,25 @@ if(!isset($_SESSION['auth'])){
 
 
 
+             <!-- Nav Item - Pages Collapse Menu -->
+             <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#food"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Foods</span>
+                </a>
+                <div id="food" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="./add_category.php">Category</a>
+                        <a class="collapse-item" href="./add_food.php">Add Food</a>
+                        <a class="collapse-item" href="./all_food.php">All Foods</a>
+                    </div>
+                </div>
+            </li>
+
+
+
+
         </ul>
         <!-- End of Sidebar -->
 

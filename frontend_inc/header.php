@@ -1,4 +1,6 @@
-
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -75,7 +77,22 @@
             </ul>
           </li>
           <li><a href="#contact">Contact</a></li>
-          <li><a href="./backend/register.php" style="color:red;">Registration/Login</a></li>
+
+          <?php
+
+                if(isset( $_SESSION['auth'])){
+          ?>
+
+                  <li> <a href="./Controller/logout.php">Logout</a></li>
+          <?php
+          }else{
+          ?>
+            <li><a href="./backend/register.php" style="color:red;">Registration/Login</a></li>
+            <?php
+          }
+          ?>
+
+        
         </ul>
       </nav><!-- .navbar -->
 

@@ -41,24 +41,32 @@ if(count($errors) > 0){
          $query =  "SELECT * FROM users WHERE email = '$_email' AND password = '$hash'";
          $che_pass = mysqli_query($conn,$query);
 
+            $auth = mysqli_fetch_assoc($che_pass);
+            
          if(mysqli_num_rows($che_pass) > 0){
 
-            $auth = mysqli_fetch_assoc($che_pass);
-            $_SESSION['auth'] = $auth;
-            header("location: ../backend/deshboard.php");
+                if($auth['user_type'] == 1){
 
+                    $_SESSION['auth'] = $auth;
+                    header("location: ../backend/deshboard.php");
+                }else{
+
+                    $_SESSION['auth'] = $auth;
+                    header("location: http://localhost/Yummy/");
+
+                }
            
 
          }
          else{
             $_SESSION['errors']['error_password'] = "Incorrect your password";
-            header("location: ../login.php");
+            header("location: ../backend/login.php");
          }
       
    }else{
         
         $_SESSION['errors']['error_email'] = "This email address is not fonund!";
-        header("location: ../login.php");
+        header("location: ../backend/login.php");
    }
   
 }

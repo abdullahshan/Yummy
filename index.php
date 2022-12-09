@@ -8,7 +8,37 @@
     $exicute = mysqli_query($conn,$query);
       $data = mysqli_fetch_all($exicute,1);
 
-   
+
+
+      ///---check--Food---table--//
+
+      $query = "SELECT * FROM foods";
+        $check_food_table = mysqli_query($conn,$query);
+
+      //-----Statars---food---------//
+
+      $query = "SELECT * FROM foods WHERE category_id = '130' && status = '1'";
+        $exicute = mysqli_query($conn,$query);
+          $statar_data = mysqli_fetch_all($exicute,1);
+
+          //-----breakfast---food---------//
+
+          $query = "SELECT * FROM foods WHERE category_id = '120' && status = '1'";
+          $breakfat = mysqli_query($conn,$query);
+            $breakfat = mysqli_fetch_all($breakfat,1);
+
+                  //-----lunch---food---------//
+
+                  $query = "SELECT * FROM foods WHERE category_id = '121' && status = '1'";
+                    $lunch = mysqli_query($conn,$query);
+                      $lunch = mysqli_fetch_all($lunch,1);
+
+                        //-----lunch---food---------//
+
+                  $query = "SELECT * FROM foods WHERE category_id = '122' && status = '1'";
+                  $dinner = mysqli_query($conn,$query);
+                    $dinner = mysqli_fetch_all($dinner,1);
+
 
 ?>
 
@@ -169,359 +199,230 @@
       </div>
     </section><!-- End Stats Counter Section -->
 
+
+
+
     <!-- ======= Menu Section ======= -->
+
+    <?php
+
+      if(mysqli_num_rows($check_food_table) > 0){
+
+        ?>
+
+        
     <section id="menu" class="menu">
-      <div class="container" data-aos="fade-up">
+    <div class="container" data-aos="fade-up">
 
-        <div class="section-header">
-          <h2>Our Menu</h2>
-          <p>Check Our <span>Yummy Menu</span></p>
-        </div>
+      <div class="section-header">
+        <h2>Our Menu</h2>
+        <p>Check Our <span>Yummy Menu</span></p>
+      </div>
 
-        <ul class="nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
+      <ul class="nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
 
+        
+      <?php
+
+        if($statar_data == !false){
+          ?>
           <li class="nav-item">
-            <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#menu-starters">
-              <h4>Starters</h4>
-            </a>
-          </li><!-- End tab nav item -->
+          <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#menu-starters">
+            <h4>Starters</h4>
+          </a>
+        </li>
+          <?php
+        }
 
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-breakfast">
-              <h4>Breakfast</h4>
-            </a><!-- End tab nav item -->
+          ?>
+      <!-- End tab nav item -->
 
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-lunch">
-              <h4>Lunch</h4>
-            </a>
-          </li><!-- End tab nav item -->
 
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-dinner">
-              <h4>Dinner</h4>
-            </a>
-          </li><!-- End tab nav item -->
+        <?php
+            if($breakfat == !false){
+              ?>
+              <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-breakfast">
+            <h4>Breakfast</h4>
+          </a>
+         </li>
+              <?php
+            }
+        ?>
+        <!-- End tab nav item -->
 
-        </ul>
+          <?php
+          if($lunch == !false){
+            ?>
+             <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-lunch">
+            <h4>Lunch</h4>
+          </a>
+        </li>
+            <?php
+          }
+          ?>
+       <!-- End tab nav item -->
 
-        <div class="tab-content" data-aos="fade-up" data-aos-delay="300">
+       <?php
+          if($dinner == !false){
+            ?>
+              <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-dinner">
+            <h4>Dinner</h4>
+          </a>
+        </li>
+            <?php
+          }
+          ?>
+      <!-- End tab nav item -->
 
-          <div class="tab-pane fade active show" id="menu-starters">
+      </ul>
 
-            <div class="tab-header text-center">
-              <p>Menu</p>
-              <h3>Starters</h3>
-            </div>
+      <div class="tab-content" data-aos="fade-up" data-aos-delay="300">
 
-            <div class="row gy-5">
+        <div class="tab-pane fade active show" id="menu-starters">
 
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-1.png" class="glightbox"><img src="assets/img/menu/menu-item-1.png" class="menu-img img-fluid" alt=""></a>
-                <h4>Magnam Tiste</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  $5.95
-                </p>
-              </div><!-- Menu Item -->
+          <div class="tab-header text-center">
+            <p>Menu</p>
+            <h3>Starters</h3>
+          </div>
 
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-2.png" class="glightbox"><img src="assets/img/menu/menu-item-2.png" class="menu-img img-fluid" alt=""></a>
-                <h4>Aut Luia</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  $14.95
-                </p>
-              </div><!-- Menu Item -->
+          <div class="row gy-5">
 
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-3.png" class="glightbox"><img src="assets/img/menu/menu-item-3.png" class="menu-img img-fluid" alt=""></a>
-                <h4>Est Eligendi</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  $8.95
-                </p>
-              </div><!-- Menu Item -->
+          <?php
 
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-4.png" class="glightbox"><img src="assets/img/menu/menu-item-4.png" class="menu-img img-fluid" alt=""></a>
-                <h4>Eos Luibusdam</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  $12.95
-                </p>
-              </div><!-- Menu Item -->
+          foreach($statar_data as $s_statar_data){
+            ?>
 
               <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-5.png" class="glightbox"><img src="assets/img/menu/menu-item-5.png" class="menu-img img-fluid" alt=""></a>
-                <h4>Eos Luibusdam</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  $12.95
-                </p>
-              </div><!-- Menu Item -->
+              <a href="assets/img/menu/menu-item-6.png" class="glightbox"><img src="./upload//food/<?= $s_statar_data['image'] ?>" class="menu-img img-fluid" alt=""></a>
+              <h4><?= $s_statar_data['title'] ?></h4>
+              <p class="ingredients">
+                <?= $s_statar_data['description'] ?>
+              </p>
+              <p class="price">
+              <?= $s_statar_data['price'] ?>
+              </p>
+            </div><!-- Menu Item -->
 
+            <?php
+          }
+
+        ?>
+           
+
+          </div>
+        </div><!-- End Starter Menu Content -->
+
+        <div class="tab-pane fade" id="menu-breakfast">
+
+          <div class="tab-header text-center">
+            <p>Menu</p>
+            <h3>Breakfast</h3>
+          </div>
+
+          <div class="row gy-5">
+
+           <?Php
+
+            foreach($breakfat as $breakfat_data){
+              ?>
               <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-6.png" class="glightbox"><img src="assets/img/menu/menu-item-6.png" class="menu-img img-fluid" alt=""></a>
-                <h4>Laboriosam Direva</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  $9.95
-                </p>
-              </div><!-- Menu Item -->
+              <a href="assets/img/menu/menu-item-6.png" class="glightbox"><img src="./upload//food/<?= $breakfat_data['image'] ?>" class="menu-img img-fluid" alt=""></a>
+              <h4><?= $breakfat_data['title'] ?></h4>
+              <p class="ingredients">
+              <?= $breakfat_data['description'] ?>
+              </p>
+              <p class="price">
+              <?= $breakfat_data['price'] ?>
+              </p>
+            </div><!-- Menu Item -->
+                <?php
+            }
 
-            </div>
-          </div><!-- End Starter Menu Content -->
+          ?>
 
-          <div class="tab-pane fade" id="menu-breakfast">
+          </div>
+        </div><!-- End Breakfast Menu Content -->
 
-            <div class="tab-header text-center">
-              <p>Menu</p>
-              <h3>Breakfast</h3>
-            </div>
+        <div class="tab-pane fade" id="menu-lunch">
 
-            <div class="row gy-5">
+          <div class="tab-header text-center">
+            <p>Menu</p>
+            <h3>Lunch</h3>
+          </div>
 
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-1.png" class="glightbox"><img src="assets/img/menu/menu-item-1.png" class="menu-img img-fluid" alt=""></a>
-                <h4>Magnam Tiste</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  $5.95
-                </p>
-              </div><!-- Menu Item -->
+          <div class="row gy-5">
 
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-2.png" class="glightbox"><img src="assets/img/menu/menu-item-2.png" class="menu-img img-fluid" alt=""></a>
-                <h4>Aut Luia</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  $14.95
-                </p>
-              </div><!-- Menu Item -->
+          <?php
 
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-3.png" class="glightbox"><img src="assets/img/menu/menu-item-3.png" class="menu-img img-fluid" alt=""></a>
-                <h4>Est Eligendi</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  $8.95
-                </p>
-              </div><!-- Menu Item -->
+            foreach($lunch as $lunch_data){
+              ?>
 
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-4.png" class="glightbox"><img src="assets/img/menu/menu-item-4.png" class="menu-img img-fluid" alt=""></a>
-                <h4>Eos Luibusdam</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  $12.95
-                </p>
-              </div><!-- Menu Item -->
+            <div class="col-lg-4 menu-item">
+              <a href="assets/img/menu/menu-item-5.png" class="glightbox"><img src="./upload//food/<?= $lunch_data['image'] ?>" class="menu-img img-fluid" alt=""></a>
+              <h4><?= $lunch_data['title'] ?></h4>
+              <p class="ingredients">
+              <?= $lunch_data['description'] ?>
+              </p>
+              <p class="price">
+               <?= $lunch_data['price'] ?>
+              </p>
+            </div><!-- Menu Item -->
 
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-5.png" class="glightbox"><img src="assets/img/menu/menu-item-5.png" class="menu-img img-fluid" alt=""></a>
-                <h4>Eos Luibusdam</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  $12.95
-                </p>
-              </div><!-- Menu Item -->
+              <?php                  
+            }
 
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-6.png" class="glightbox"><img src="assets/img/menu/menu-item-6.png" class="menu-img img-fluid" alt=""></a>
-                <h4>Laboriosam Direva</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  $9.95
-                </p>
-              </div><!-- Menu Item -->
+          ?>
 
-            </div>
-          </div><!-- End Breakfast Menu Content -->
+          </div>
+        </div><!-- End Lunch Menu Content -->
 
-          <div class="tab-pane fade" id="menu-lunch">
+        <div class="tab-pane fade" id="menu-dinner">
 
-            <div class="tab-header text-center">
-              <p>Menu</p>
-              <h3>Lunch</h3>
-            </div>
+          <div class="tab-header text-center">
+            <p>Menu</p>
+            <h3>Dinner</h3>
+          </div>
 
-            <div class="row gy-5">
+          <div class="row gy-5">
 
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-1.png" class="glightbox"><img src="assets/img/menu/menu-item-1.png" class="menu-img img-fluid" alt=""></a>
-                <h4>Magnam Tiste</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  $5.95
-                </p>
-              </div><!-- Menu Item -->
+           <?php
 
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-2.png" class="glightbox"><img src="assets/img/menu/menu-item-2.png" class="menu-img img-fluid" alt=""></a>
-                <h4>Aut Luia</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  $14.95
-                </p>
-              </div><!-- Menu Item -->
+              foreach($dinner as $dinner_data){
+                ?>
 
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-3.png" class="glightbox"><img src="assets/img/menu/menu-item-3.png" class="menu-img img-fluid" alt=""></a>
-                <h4>Est Eligendi</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  $8.95
-                </p>
-              </div><!-- Menu Item -->
+            <div class="col-lg-4 menu-item">
+              <a href="assets/img/menu/menu-item-5.png" class="glightbox"><img src="./upload//food/<?= $dinner_data['image'] ?>" class="menu-img img-fluid" alt=""></a>
+              <h4><?= $dinner_data['title'] ?></h4>
+              <p class="ingredients">
+              <?= $dinner_data['description'] ?>
+              </p>
+              <p class="price">
+               <?= $dinner_data['price'] ?>
+              </p>
+            </div><!-- Menu Item -->
+                
+                <?php
+              }
 
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-4.png" class="glightbox"><img src="assets/img/menu/menu-item-4.png" class="menu-img img-fluid" alt=""></a>
-                <h4>Eos Luibusdam</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  $12.95
-                </p>
-              </div><!-- Menu Item -->
+            ?>
 
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-5.png" class="glightbox"><img src="assets/img/menu/menu-item-5.png" class="menu-img img-fluid" alt=""></a>
-                <h4>Eos Luibusdam</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  $12.95
-                </p>
-              </div><!-- Menu Item -->
-
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-6.png" class="glightbox"><img src="assets/img/menu/menu-item-6.png" class="menu-img img-fluid" alt=""></a>
-                <h4>Laboriosam Direva</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  $9.95
-                </p>
-              </div><!-- Menu Item -->
-
-            </div>
-          </div><!-- End Lunch Menu Content -->
-
-          <div class="tab-pane fade" id="menu-dinner">
-
-            <div class="tab-header text-center">
-              <p>Menu</p>
-              <h3>Dinner</h3>
-            </div>
-
-            <div class="row gy-5">
-
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-1.png" class="glightbox"><img src="assets/img/menu/menu-item-1.png" class="menu-img img-fluid" alt=""></a>
-                <h4>Magnam Tiste</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  $5.95
-                </p>
-              </div><!-- Menu Item -->
-
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-2.png" class="glightbox"><img src="assets/img/menu/menu-item-2.png" class="menu-img img-fluid" alt=""></a>
-                <h4>Aut Luia</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  $14.95
-                </p>
-              </div><!-- Menu Item -->
-
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-3.png" class="glightbox"><img src="assets/img/menu/menu-item-3.png" class="menu-img img-fluid" alt=""></a>
-                <h4>Est Eligendi</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  $8.95
-                </p>
-              </div><!-- Menu Item -->
-
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-4.png" class="glightbox"><img src="assets/img/menu/menu-item-4.png" class="menu-img img-fluid" alt=""></a>
-                <h4>Eos Luibusdam</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  $12.95
-                </p>
-              </div><!-- Menu Item -->
-
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-5.png" class="glightbox"><img src="assets/img/menu/menu-item-5.png" class="menu-img img-fluid" alt=""></a>
-                <h4>Eos Luibusdam</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  $12.95
-                </p>
-              </div><!-- Menu Item -->
-
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-6.png" class="glightbox"><img src="assets/img/menu/menu-item-6.png" class="menu-img img-fluid" alt=""></a>
-                <h4>Laboriosam Direva</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  $9.95
-                </p>
-              </div><!-- Menu Item -->
-
-            </div>
-          </div><!-- End Dinner Menu Content -->
-
-        </div>
+          </div>
+        </div><!-- End Dinner Menu Content -->
 
       </div>
+
+    </div>
+
+
+            <?php
+
+      }
+
+      ?>
+
     </section><!-- End Menu Section -->
 
     <!-- ======= Testimonials Section ======= -->
