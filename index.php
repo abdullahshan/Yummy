@@ -10,35 +10,42 @@
 
 
 
-      ///---check--Food---table--//
+      //---Categories---//
 
-      $query = "SELECT * FROM foods";
-        $check_food_table = mysqli_query($conn,$query);
-
-      //-----Statars---food---------//
-
-      $query = "SELECT * FROM foods WHERE category_id = '130' && status = '1'";
+      $query = "SELECT c.id, c.title, c.status FROM category c INNER JOIN foods f ON c.id = f.category_id WHERE c.status = 1 GROUP BY c.id ";
         $exicute = mysqli_query($conn,$query);
-          $statar_data = mysqli_fetch_all($exicute,1);
+          $category = mysqli_fetch_all($exicute,1);
 
-          //-----breakfast---food---------//
+          if(isset($_POST['submit'])){
+            $category = $_POST['category'];
 
-          $query = "SELECT * FROM foods WHERE category_id = '120' && status = '1'";
-          $breakfat = mysqli_query($conn,$query);
-            $breakfat = mysqli_fetch_all($breakfat,1);
+            $sql="SELECT * FROM category WHERE status = '1' and title like '%".$category."%'";
+            $q=mysqli_query($conn,$sql);
+            $category = mysqli_fetch_all($q,1);
+          
+        }
 
-                  //-----lunch---food---------//
+        
+      //-----food---------//
 
-                  $query = "SELECT * FROM foods WHERE category_id = '121' && status = '1'";
-                    $lunch = mysqli_query($conn,$query);
-                      $lunch = mysqli_fetch_all($lunch,1);
+      $query = "SELECT * FROM foods WHERE status = '1'";
+        $foodss = mysqli_query($conn,$query);
+          $foods = mysqli_fetch_all($foodss,1);
 
-                        //-----lunch---food---------//
 
-                  $query = "SELECT * FROM foods WHERE category_id = '122' && status = '1'";
-                  $dinner = mysqli_query($conn,$query);
-                    $dinner = mysqli_fetch_all($dinner,1);
+        //   if(isset($_POST['submit'])){
+        //     $search = $_POST['search'];
 
+        //     $sql="SELECT * FROM foods WHERE title like '%".$search."%'";
+        //     $q=mysqli_query($conn,$sql);
+        //     $foods = mysqli_fetch_all($q,1);
+          
+        // }
+
+          //-----food---------//
+
+
+         
 
 ?>
 
@@ -206,7 +213,7 @@
 
     <?php
 
-      if(mysqli_num_rows($check_food_table) > 0){
+      if(mysqli_num_rows($foodss) > 0){
 
         ?>
 
@@ -217,200 +224,139 @@
       <div class="section-header">
         <h2>Our Menu</h2>
         <p>Check Our <span>Yummy Menu</span></p>
+
+        <!-- Search Form-----> 
+
+       <form action="http://localhost/Yummy/#menu" method="POST">
+            <input type="text" name="category" placeholder="search for category..." style="padding: 4px; border-radius:7px;">
+            <button class="btn btn-outline-primary" type="submit" name="submit">search</button>
+        </form>
+
+
+       <!-- <form action="http://localhost/Yummy/#menu" method="POST">
+            <input type="text" name="search" placeholder="search for product..." style="padding: 4px; border-radius:7px;">
+            <button class="btn btn-outline-primary" style="margin-top:10px;padding: 5px;" type="submit" name="submit">search</button>
+        </form> --> 
+         <!--Search Form----->
+
+
       </div>
 
       <ul class="nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
 
-        
+    <!-----------Category-------->
+
       <?php
 
-        if($statar_data == !false){
-          ?>
-          <li class="nav-item">
-          <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#menu-starters">
-            <h4>Starters</h4>
-          </a>
-        </li>
-          <?php
+        foreach($category as $key=> $s_category){
+            ?>
+        
+           <li class="nav-item">
+              <a class="nav-link <?= $key == 0 ? "active show" : '' ?>" data-bs-toggle="tab" data-bs-target="#menu-<?= str_replace(' ','-',$s_category['title']) ?>">
+                <h4><?= $s_category['title'] ?></h4>
+              </a>
+            </li>
+           
+           <?php
         }
-
           ?>
-      <!-- End tab nav item -->
-
-
-        <?php
-            if($breakfat == !false){
-              ?>
-              <li class="nav-item">
-          <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-breakfast">
-            <h4>Breakfast</h4>
-          </a>
-         </li>
-              <?php
-            }
-        ?>
-        <!-- End tab nav item -->
-
-          <?php
-          if($lunch == !false){
-            ?>
-             <li class="nav-item">
-          <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-lunch">
-            <h4>Lunch</h4>
-          </a>
-        </li>
-            <?php
-          }
-          ?>
-       <!-- End tab nav item -->
-
-       <?php
-          if($dinner == !false){
-            ?>
-              <li class="nav-item">
-          <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-dinner">
-            <h4>Dinner</h4>
-          </a>
-        </li>
-            <?php
-          }
-          ?>
-      <!-- End tab nav item -->
 
       </ul>
 
+
+
+
+
       <div class="tab-content" data-aos="fade-up" data-aos-delay="300">
 
-        <div class="tab-pane fade active show" id="menu-starters">
+
+      <!------------Menu--title---------->
+
+        <?php
+
+        foreach($category as $key=> $s_category){
+          ?>
+
+          <div class="tab-pane fade <?= $key == 0 ? "active show" : '' ?>" id="menu-<?= str_replace(' ','-',$s_category['title']) ?>">
 
           <div class="tab-header text-center">
             <p>Menu</p>
-            <h3>Starters</h3>
+            <h3><?= $s_category['title'] ?></h3>
           </div>
 
           <div class="row gy-5">
 
           <?php
 
-          foreach($statar_data as $s_statar_data){
+
+
+
+          //--------All_product__form_food_table------//
+
+
+
+          foreach($foods as $food){
+
+          //------Check--Category_id--to_prduct_table--for--product----//
+          
+
+            if($s_category['id'] == $food['category_id']){
+               
+                      ?>
+           
+              <div class="col-lg-4 menu-item">
+              <a href="assets/img/menu/menu-item-6.png" class="glightbox"><img src="./upload//food/<?= $food['image'] ?>" class="menu-img img-fluid" alt=""></a>
+              <h4><?= $food['title'] ?></h4>
+              <p class="ingredients">
+                <?= $food['description'] ?>
+              </p>
+            
+              <div style="display: flex;">
+              <div style="margin: auto;">
+             Price
+              <p class="price">
+             $_ <?= $food['price'] ?>/-
+              </p>
+             </div>
+             <form action="./Controller/card.blade.php" method="POST" enctype="multipart/form-data">
+                <input type="hidden" value="<?= $food['id'] ?>" name="id">
+                <input type="hidden" value="<?=  $food['image'] ?>" name="image">
+                <input type="hidden" value="<?= $food['title'] ?>" name="title">
+                <input type="hidden" value="<?= $food['description'] ?>" name="description" >
+                <input type="hidden" value="<?= $food['price'] ?>" name="price">
+
+             <div style="margin: auto;">
+             <p>
+             <button class="btn btn-secondary" type="submit" name="submit">Ad to card</button>
+              </p>
+             </div>
+             </form>
+
+             
+              </div>
+              
+            </div><!-- Menu Item -->
+
+        
+            <?php
+            }
             ?>
 
-              <div class="col-lg-4 menu-item">
-              <a href="assets/img/menu/menu-item-6.png" class="glightbox"><img src="./upload//food/<?= $s_statar_data['image'] ?>" class="menu-img img-fluid" alt=""></a>
-              <h4><?= $s_statar_data['title'] ?></h4>
-              <p class="ingredients">
-                <?= $s_statar_data['description'] ?>
-              </p>
-              <p class="price">
-              <?= $s_statar_data['price'] ?>
-              </p>
-            </div><!-- Menu Item -->
+
 
             <?php
           }
 
-        ?>
-           
-
-          </div>
-        </div><!-- End Starter Menu Content -->
-
-        <div class="tab-pane fade" id="menu-breakfast">
-
-          <div class="tab-header text-center">
-            <p>Menu</p>
-            <h3>Breakfast</h3>
-          </div>
-
-          <div class="row gy-5">
-
-           <?Php
-
-            foreach($breakfat as $breakfat_data){
-              ?>
-              <div class="col-lg-4 menu-item">
-              <a href="assets/img/menu/menu-item-6.png" class="glightbox"><img src="./upload//food/<?= $breakfat_data['image'] ?>" class="menu-img img-fluid" alt=""></a>
-              <h4><?= $breakfat_data['title'] ?></h4>
-              <p class="ingredients">
-              <?= $breakfat_data['description'] ?>
-              </p>
-              <p class="price">
-              <?= $breakfat_data['price'] ?>
-              </p>
-            </div><!-- Menu Item -->
-                <?php
-            }
-
           ?>
 
+
           </div>
-        </div><!-- End Breakfast Menu Content -->
-
-        <div class="tab-pane fade" id="menu-lunch">
-
-          <div class="tab-header text-center">
-            <p>Menu</p>
-            <h3>Lunch</h3>
-          </div>
-
-          <div class="row gy-5">
+          </div><!-- End Starter Menu Content -->
 
           <?php
+        }
 
-            foreach($lunch as $lunch_data){
-              ?>
-
-            <div class="col-lg-4 menu-item">
-              <a href="assets/img/menu/menu-item-5.png" class="glightbox"><img src="./upload//food/<?= $lunch_data['image'] ?>" class="menu-img img-fluid" alt=""></a>
-              <h4><?= $lunch_data['title'] ?></h4>
-              <p class="ingredients">
-              <?= $lunch_data['description'] ?>
-              </p>
-              <p class="price">
-               <?= $lunch_data['price'] ?>
-              </p>
-            </div><!-- Menu Item -->
-
-              <?php                  
-            }
-
-          ?>
-
-          </div>
-        </div><!-- End Lunch Menu Content -->
-
-        <div class="tab-pane fade" id="menu-dinner">
-
-          <div class="tab-header text-center">
-            <p>Menu</p>
-            <h3>Dinner</h3>
-          </div>
-
-          <div class="row gy-5">
-
-           <?php
-
-              foreach($dinner as $dinner_data){
-                ?>
-
-            <div class="col-lg-4 menu-item">
-              <a href="assets/img/menu/menu-item-5.png" class="glightbox"><img src="./upload//food/<?= $dinner_data['image'] ?>" class="menu-img img-fluid" alt=""></a>
-              <h4><?= $dinner_data['title'] ?></h4>
-              <p class="ingredients">
-              <?= $dinner_data['description'] ?>
-              </p>
-              <p class="price">
-               <?= $dinner_data['price'] ?>
-              </p>
-            </div><!-- Menu Item -->
-                
-                <?php
-              }
-
-            ?>
-
-          </div>
-        </div><!-- End Dinner Menu Content -->
+        ?>
 
       </div>
 

@@ -42,7 +42,7 @@ session_start();
             <div class="toast show" style="position:absolute; bottom: 1px; right: 120px;" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
 
-            <strong class="me-auto">Yemmy Foods</strong>
+            <strong class="me-auto"><h4>Yemmy Foods</h4></strong>
           
             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
@@ -76,7 +76,7 @@ session_start();
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
-                                    <form class="user" action="../Controller/login_user.php" method="POST">
+                                    <form class="user" action="../Controller/resend_email.php" method="POST">
                                         <div class="form-group">
                                             <input type="email" name="email" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
@@ -90,40 +90,18 @@ session_start();
                                                 }
                                                 ?>
                                         </div>
-                                        <div class="form-group">
-                                            <input type="password" name="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password">
-                                                <?php
-                                                if(isset($_SESSION['errors']['error_password'])){
-                                            ?>
-                                                 <span class="text text-danger"><?= $_SESSION['errors']['error_password'] ?></span>
-                                            <?php
-                                                }
-                                                ?>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Remember
-                                                    Me</label>
-                                            </div>
-                                        </div>
-                                        <button type="submit" name="login" class="btn btn-primary btn-user btn-block">
-                                            Login
+                                    
+                                        <button type="submit" name="resend" class="btn btn-primary btn-user btn-block">
+                                            Resend
                                         </button>
                                       
                                     </form>
                                    
+                                   
                                     <div class="text-center">
-                                        <a class="small" href="forgot_password.php">Forgot Password?</a>
+                                        <a class="small" href="./login.php">Login!</a>
                                     </div>
-                                    <div class="text-center">
-                                        <a class="small" href="./register.php">Create an Account!</a>
-                                    </div>
-                                    <div class="text-center">
-                                        You did not have verificaion emil address?
-                                        <a class="small" href="./email_resend.php">Resend</a>
-                                    </div>
+                                
                                 </div>
                             </div>
                         </div>
@@ -155,5 +133,8 @@ session_start();
 <?php
 
 session_unset();
+
+
+
 
 ?>

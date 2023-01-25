@@ -41,11 +41,13 @@ session_start();
 
 <body>
 
+
+
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center me-auto me-lg-0">
+      <a href="http://localhost/Yummy/" class="logo d-flex align-items-center me-auto me-lg-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1>Yummy<span>.</span></h1>
@@ -77,7 +79,39 @@ session_start();
             </ul>
           </li>
           <li><a href="#contact">Contact</a></li>
+          <li><a href="./frontend_inc/cart_view.php">card</a></li>
 
+            <?php
+  include("./database/env.php");
+
+
+  if(isset($_SESSION['auth'])){
+
+    $user_id = $_SESSION['auth']['id'];
+    $user_email = $_SESSION['auth']['email'];
+  
+          $query = "SELECT * FROM card where user_id = '$user_id'";
+          $exicute = mysqli_query($conn,$query);
+          $row = mysqli_num_rows($exicute);
+  
+  
+          
+          $query = "SELECT * FROM orders where email = '$user_email'";
+          $exicute = mysqli_query($conn,$query);
+          $orders = mysqli_num_rows($exicute);
+  
+          // print_r($row);
+
+  }
+
+?>
+
+
+          <span style="background-color: #CCCCFF; border-radius: 5px;color:black"><?Php if(isset($_SESSION['auth'])){ print_r($row); } ?></span>
+          <li><a href="./frontend_inc/orders.php">Orders</a></li>
+          <span style="background-color: #CCCCFF; border-radius: 5px;color:black"><?php if(isset($_SESSION['auth'])){ print_r($orders); } ?></span>
+
+          
           <?php
 
                 if(isset( $_SESSION['auth'])){

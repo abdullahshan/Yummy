@@ -47,7 +47,7 @@ session_start();
             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
             <div class="toast-body">
-            <span class="text-success"><h6><?= $_SESSION['success'] ?></h6></span>
+            <span><?= $_SESSION['success'] ?></span>
             </div>
             </div>
 
@@ -76,54 +76,32 @@ session_start();
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
-                                    <form class="user" action="../Controller/login_user.php" method="POST">
+                                    <form class="user" action="../Controller/forget_password.php" method="POST">
                                         <div class="form-group">
                                             <input type="email" name="email" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
                                                 placeholder="Enter Email Address...">
 
                                         <?php
-                                                if(isset($_SESSION['errors']['error_email'])){
+                                                if(isset($_SESSION['errors'])){
                                             ?>
-                                                 <span class="text text-danger"><?= $_SESSION['errors']['error_email'] ?></span>
+                                                 <span class="text text-danger"><?= $_SESSION['errors'] ?></span>
                                             <?php
                                                 }
                                                 ?>
                                         </div>
-                                        <div class="form-group">
-                                            <input type="password" name="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password">
-                                                <?php
-                                                if(isset($_SESSION['errors']['error_password'])){
-                                            ?>
-                                                 <span class="text text-danger"><?= $_SESSION['errors']['error_password'] ?></span>
-                                            <?php
-                                                }
-                                                ?>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Remember
-                                                    Me</label>
-                                            </div>
-                                        </div>
-                                        <button type="submit" name="login" class="btn btn-primary btn-user btn-block">
-                                            Login
+                                    
+                                        <button type="submit" name="forget_password" class="btn btn-primary btn-user btn-block">
+                                            Forget Password
                                         </button>
                                       
                                     </form>
                                    
+                                   
                                     <div class="text-center">
-                                        <a class="small" href="forgot_password.php">Forgot Password?</a>
+                                        <a class="small" href="./login.php">Login!</a>
                                     </div>
-                                    <div class="text-center">
-                                        <a class="small" href="./register.php">Create an Account!</a>
-                                    </div>
-                                    <div class="text-center">
-                                        You did not have verificaion emil address?
-                                        <a class="small" href="./email_resend.php">Resend</a>
-                                    </div>
+                                
                                 </div>
                             </div>
                         </div>
@@ -155,5 +133,8 @@ session_start();
 <?php
 
 session_unset();
+
+
+
 
 ?>

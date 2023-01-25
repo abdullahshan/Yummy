@@ -42,9 +42,9 @@ if(isset($_SESSION['success'])){
     <div class="card-header">
         <h1>All Food</h1>
     </div>
-        <div class="card-body">
+        <div class="card-body" style="margin: auto;">
 
-            <table class="table w-100">
+            <table class="table table-responsive">
                 <div class="thead">
                     <tr>
                         <th>Id</th>

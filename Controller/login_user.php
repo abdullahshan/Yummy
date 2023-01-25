@@ -10,7 +10,7 @@ if(isset($_POST['login'])){
     $_email = $_POST['email'];
     $_password = $_POST['password'];
     
-    $hash = sha1($_password);
+    $hash = md5(sha1($_password));
 }
 
 
@@ -45,21 +45,28 @@ if(count($errors) > 0){
             
          if(mysqli_num_rows($che_pass) > 0){
 
-                if($auth['user_type'] == 1){
+               
+                if($auth['status']==1){
+                    if($auth['user_type'] == 1){
 
-                    $_SESSION['auth'] = $auth;
-                    header("location: ../backend/deshboard.php");
+                        $_SESSION['auth'] = $auth;
+                        header("location: ../backend/deshboard.php");
+                    }else{
+    
+                        $_SESSION['auth'] = $auth;
+                        header("location: http://localhost/Yummy/");
+    
+                    }
                 }else{
 
-                    $_SESSION['auth'] = $auth;
-                    header("location: http://localhost/Yummy/");
-
+                    $_SESSION['success'] = "Sorry! You have must be verifyed your email address";
+                    header("location: http://localhost/Yummy/backend/login.php");
                 }
            
 
          }
          else{
-            $_SESSION['errors']['error_password'] = "Incorrect your password";
+            $_SESSION['errors']['error_password'] = "Incorrect your email or password";
             header("location: ../backend/login.php");
          }
       

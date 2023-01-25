@@ -96,7 +96,7 @@ $query = "SELECT * FROM category WHERE status = '1'";
 
 
                        <label class="mt-3" for="">Insert price
-                        <input type="text" name="price" class="form-control" placeholder="enter your image">
+                        <input type="number" name="price" class="form-control" placeholder="enter your image">
                                                 
                                         <?php
 

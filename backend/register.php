@@ -4,8 +4,6 @@
 session_start();
 
 
-
-
 ?>
 
 <!DOCTYPE html>
@@ -29,26 +27,50 @@ session_start();
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 </head>
 
 <body class="bg-gradient-primary">
 
+
+<?php 
+
+if(isset($_SESSION['success'])){
+    
+    ?>
+<div class="toast show" style="position:absolute; bottom: 20px; right: 125px;" role="alert" aria-live="assertive" aria-atomic="true">
+<div class="toast-header">
+
+<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+</div>
+<div class="toast-body">
+<span class="text-success"><h6><?= $_SESSION['success'] ?></h6></span>
+</div>
+</div>
+
+<?php
+}
+
+?>
+
+
+
     <div class="container">
 
+   
+
         <div class="card o-hidden border-0 shadow-lg my-5">
+            
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
                 <div class="row">
+
                     <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
                     <div class="col-lg-7">
                         <div class="p-5">
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
-
-
-
 
                             <form class="user" method="POST" action="../Controller/Register_user.php">
                                 <div class="form-group row">
@@ -135,7 +157,7 @@ session_start();
                                    
                                         </div>
                                 </div>
-                                <button type="submit" name="Register" href="login.html" class="btn btn-primary btn-user btn-block">
+                                <button type="submit" name="Register" class="btn btn-primary btn-user btn-block">
                                     Register Account
                                 </button>
                                
@@ -143,9 +165,7 @@ session_start();
                                 
                             </form>
                            
-                            <div class="text-center">
-                                <a class="small" href="forgot-password.html">Forgot Password?</a>
-                            </div>
+                            
                             <div class="text-center">
                                 <a class="small" href="./login.php">Already have an account? Login!</a>
                             </div>
@@ -171,8 +191,12 @@ session_start();
 
 </html>
 
+
 <?php
 
-session_unset();
+ unset($_SESSION['success']);
+ unset($_SESSION['errors']);     
 
 ?>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>

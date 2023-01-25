@@ -7,6 +7,14 @@ if(!isset($_SESSION['auth'])){
     header("location: ./login.php");
 }
 
+ $data = $_SESSION['auth']['user_type'];
+
+ if($data==0){
+
+    header("location: http://localhost/Yummy/");
+ }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -136,6 +144,20 @@ if(!isset($_SESSION['auth'])){
                         <a class="collapse-item" href="./add_category.php">Category</a>
                         <a class="collapse-item" href="./add_food.php">Add Food</a>
                         <a class="collapse-item" href="./all_food.php">All Foods</a>
+                    </div>
+                </div>
+            </li>
+
+             <!-- Nav Item - Pages Collapse Menu -->
+             <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#orders"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Orders</span>
+                </a>
+                <div id="orders" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="./orders.blade.php">All Orders</a>
                     </div>
                 </div>
             </li>
