@@ -22,7 +22,7 @@
              </div>
              <div class="card-header">
                  <div class="card-body">
-                 <table class="w-100">
+                 <table class="table-responsive">
  
                  <thead class="thead-dark">
                      <tr>

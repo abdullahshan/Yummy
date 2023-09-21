@@ -699,9 +699,42 @@
           <p>Need Help? <span>Contact Us</span></p>
         </div>
 
-        <div class="mb-3">
-          <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" allowfullscreen></iframe>
-        </div><!-- End Google Maps -->
+
+        <!DOCTYPE html>
+<html>
+  <head>
+    Google map api with marker
+  </head>
+  <body>
+    <div id="map_container" style="width: 50%; height: 350px;"> </div>
+    <script>
+      function initialize_map() {
+        var mapDiv = document.getElementById('map_container');
+        var map = new google.maps.Map(mapDiv, {
+            center: {lat: 28.7041, lng: 77.1025},
+			zoom: 10
+        });
+        var marker = new google.maps.Marker({
+	     position: new google.maps.LatLng(28.6315, 77.2167),
+	     map: map
+	 });
+	 var address = '<div><p><b>Organization  Address</b></p></div>';
+	 var infowindow = new google.maps.InfoWindow({
+             content: address
+         });
+         marker.addListener('click', function() {
+          infowindow.open(map, marker);
+         });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOj3a6wPLMwM5M867gznaPlyk3khaOqlo&callback=initialize_map">
+    </script>
+  </body>
+</html>
+
+      
+        
+      <!-- End Google Maps -->
 
         <div class="row gy-4">
 
